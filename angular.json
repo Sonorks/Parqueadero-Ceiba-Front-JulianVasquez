@@ -33,7 +33,7 @@
               "src/app/resources/css/alertify.css",
               "src/app/resources/css/alertify.rtl.css"
             ],
-            "scripts": ["src/app/resources/js/alertify.js"]
+            "scripts": ["src/app/resources/js/alertify.js", "./node_modules/trmcol/src/index.js"]
           },
           "configurations": {
             "production": {

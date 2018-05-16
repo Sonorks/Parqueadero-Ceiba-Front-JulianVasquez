@@ -4,17 +4,25 @@
       <ng-template ngbTabContent>
           <div class="container" style="text-align: center">
             <h1 align="center" style="margin: 3%">INGRESAR VEHICULO</h1>
-            <form>
+            <form name="ingresarVehiculoForm" id="ingresarVehiculoForm" #ingresarVehiculoForm="ngForm" novalidate>
               <div class="form-group">
                 <label for="placaIngreso">PLACA VEHICULO A INGRESAR:</label>
-                <input type="text" [(ngModel)]="ingresoModel.plate" name="plate" class="form-control" id="placaIngreso" required>
+                <input type="text" [(ngModel)]="ingresoModel.plate" name="plate" #plate="ngModel" class="form-control" id="placaIngreso" required minlength="6">
+                <div *ngIf="plate.invalid && plate.dirty" class="alert alert-danger">
+                  <div *ngIf="plate.errors.required">
+                    La placa es necesaria.
+                  </div>
+                  <div *ngIf="plate.errors.minlength">
+                    La placa debe tener 6 caracteres.
+                  </div>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="tipo">TIPO DE VEHICULO:</label>
                 <select class="form-control" [(ngModel)]="ingresoModel.type" name="type" id="tipo" required>
-                  <option (value)="CAR">CAR</option>
-                  <option (value)="BIKE">BIKE</option>
+                  <option (value)="CAR">CARRO</option>
+                  <option (value)="BIKE">MOTO</option>
                 </select>
               </div>
         
@@ -23,7 +31,7 @@
                 <input type="number" [(ngModel)]="ingresoModel.cc" name="cc" class="form-control" id="cc">
               </div>
         
-              <button (click)="IngresarVehiculo()" class="btn btn-success" style="margin: 3%">Ingresar Vehiculo</button>
+              <button (click)="ingresarVehiculoForm.valid && IngresarVehiculo()" class="btn btn-success" style="margin: 3%">Ingresar Vehiculo</button>
               <button (click)="limpiarForm('Ingreso')" class="btn btn-info" style="margin: 3%">Limpiar</button>
           
             </form>
@@ -68,6 +76,11 @@
       
           </form>
         </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="TRM">
+      <ng-template ngbTabContent>
+        El precio del dolar: {{precioDolar}}
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

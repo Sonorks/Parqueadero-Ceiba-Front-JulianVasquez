@@ -22,5 +22,4 @@ export class ParqueaderoService {
     return this.http.put('http://localhost:8090/parking/removeVehicle/'+placa, null).toPromise();
   }
 
-
 }

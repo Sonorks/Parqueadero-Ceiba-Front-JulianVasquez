@@ -7,6 +7,7 @@ import { Vehicle } from '../models/vehicle';
 
 var alertify = require('../resources/js/alertify.js');
 
+
 @Component({
   selector: 'app-parqueadero',
   templateUrl: './parqueadero.component.html',
@@ -21,12 +22,14 @@ export class ParqueaderoComponent implements OnInit {
   retiroPlaca:String = "";
   consultaPlaca:String = "";
   consultandoVehiculo = false;
+  precioDolar = "nose";
 
   constructor(
     private parqueaderoService: ParqueaderoService
   ) { }
 
   ngOnInit() {
+
   }
 
   IngresarVehiculo() {
