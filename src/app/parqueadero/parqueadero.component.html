@@ -1,0 +1,74 @@
+<div class="container">
+  <ngb-tabset>
+    <ngb-tab title="Ingreso de vehiculos">
+      <ng-template ngbTabContent>
+          <div class="container" style="text-align: center">
+            <h1 align="center" style="margin: 3%">INGRESAR VEHICULO</h1>
+            <form>
+              <div class="form-group">
+                <label for="placaIngreso">PLACA VEHICULO A INGRESAR:</label>
+                <input type="text" [(ngModel)]="ingresoModel.plate" name="plate" class="form-control" id="placaIngreso" required>
+              </div>
+
+              <div class="form-group">
+                <label for="tipo">TIPO DE VEHICULO:</label>
+                <select class="form-control" [(ngModel)]="ingresoModel.type" name="type" id="tipo" required>
+                  <option (value)="CAR">CAR</option>
+                  <option (value)="BIKE">BIKE</option>
+                </select>
+              </div>
+        
+              <div *ngIf="(ingresoModel.type == 'BIKE')" class="form-group">
+                <label for="cc">CILINDRAJE VEHICULO:</label>
+                <input type="number" [(ngModel)]="ingresoModel.cc" name="cc" class="form-control" id="cc">
+              </div>
+        
+              <button (click)="IngresarVehiculo()" class="btn btn-success" style="margin: 3%">Ingresar Vehiculo</button>
+              <button (click)="limpiarForm('Ingreso')" class="btn btn-info" style="margin: 3%">Limpiar</button>
+          
+            </form>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Salida de vehiculos">
+        <ng-template ngbTabContent>
+          <div class="container" style="text-align: center">
+            <h1 align="center" style="margin: 3%">RETIRAR VEHICULO</h1>
+            <form>
+              <div class="form-group">
+                <label for="placaRetirar">PLACA DE VEHICULO A RETIRAR:</label>
+                <input type="text" [(ngModel)]="retiroPlaca" name="retiroPlaca" class="form-control" id="placaRetirar" required>
+              </div>
+        
+              <button (click)="RetirarVehiculo()" class="btn btn-success" style="margin: 3%">Retirar Vehiculo</button>
+              <button (click)="limpiarForm('Retiro')" class="btn btn-info" style="margin: 3%">Limpiar</button>
+        
+            </form>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    <ngb-tab title="Consulta de vehiculos">
+      <ng-template ngbTabContent>
+        <div class="container" style="text-align: center">
+          <h1 align="center" style="margin: 3%">CONSULTAR VEHICULO</h1>
+          <form>
+            <div class="form-group">
+              <label for="placaConsulta">PLACA A CONSULTAR:</label>
+              <input type="text" [(ngModel)]="consultaPlaca" name="consultaPlaca" class="form-control" id="placaConsulta" required>
+            </div>
+            
+            <div *ngIf="consultandoVehiculo" class="form-group">
+              <b>PLACA: </b>{{vehiculoConsultado.plate}}<br/>
+              <b>FECHA INGRESO: </b>{{vehiculoConsultado.entryDate}}<br/>
+              <b>TIPO: </b>{{vehiculoConsultado.type}}<br/>
+            </div>
+
+            <button (click)="ConsultarVehiculo()" class="btn btn-success" style="margin: 3%">Consultar Vehiculo</button>
+            <button (click)="limpiarForm('Consulta')" class="btn btn-info" style="margin: 3%">Limpiar</button>
+      
+          </form>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
