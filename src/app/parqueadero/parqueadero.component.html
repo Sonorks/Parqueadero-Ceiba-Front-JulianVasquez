@@ -1,13 +1,13 @@
 <div class="container">
-  <ngb-tabset>
-    <ngb-tab title="Ingreso de vehiculos">
+  <ngb-tabset #tabs type="pills" justify="justified">
+    <ngb-tab id="ingresarTab" title="Ingreso de vehiculos">
       <ng-template ngbTabContent>
           <div class="container" style="text-align: center">
             <h1 align="center" style="margin: 3%">INGRESAR VEHICULO</h1>
             <form name="ingresarVehiculoForm" id="ingresarVehiculoForm" #ingresarVehiculoForm="ngForm" novalidate>
               <div class="form-group">
                 <label for="placaIngreso">PLACA VEHICULO A INGRESAR:</label>
-                <input type="text" [(ngModel)]="ingresoModel.plate" name="plate" #plate="ngModel" class="form-control" id="placaIngreso" required minlength="6">
+                <input type="text" [(ngModel)]="ingresoModel.plate" name="plate" #plate="ngModel" class="form-control" id="placaIngreso" required minlength="5">
                 <div *ngIf="plate.invalid && plate.dirty" class="alert alert-danger">
                   <div *ngIf="plate.errors.required">
                     La placa es necesaria.
@@ -38,7 +38,7 @@
           </div>
         </ng-template>
       </ngb-tab>
-      <ngb-tab title="Salida de vehiculos">
+      <ngb-tab id="retirarTab" title="Salida de vehiculos">
         <ng-template ngbTabContent>
           <div class="container" style="text-align: center">
             <h1 align="center" style="margin: 3%">RETIRAR VEHICULO</h1>
@@ -46,6 +46,16 @@
               <div class="form-group">
                 <label for="placaRetirar">PLACA DE VEHICULO A RETIRAR:</label>
                 <input type="text" [(ngModel)]="retiroPlaca" name="retiroPlaca" class="form-control" id="placaRetirar" required>
+              </div>
+
+              <div *ngIf="consultandoVehiculo" class="form-group">
+                <b>TIPO: </b>{{vehiculoConsultado.type}}<br/>
+                <b>PLACA: </b>{{vehiculoConsultado.plate}}<br/>
+                <div *ngIf="vehiculoConsultado.type=='BIKE'"><b>CC:</b>{{vehiculoConsultado.cc}}<br/></div>
+                <b>FECHA INGRESO: </b>{{vehiculoConsultado.entryDate}}<br/>
+                <b>FECHA SALIDA:</b>{{vehiculoConsultado.exitDate}}<br/>
+                <b>HORAS TOTALES:</b>{{vehiculoConsultado.totalHours}}<br/>
+                <b>PRECIO TOTAL:</b>{{vehiculoConsultado.totalPrice}}<br/>
               </div>
         
               <button (click)="RetirarVehiculo()" class="btn btn-success" style="margin: 3%">Retirar Vehiculo</button>
@@ -55,26 +65,30 @@
           </div>
         </ng-template>
       </ngb-tab>
-    <ngb-tab title="Consulta de vehiculos">
+    <ngb-tab id="consultarTab" title="Consulta de vehiculos">
       <ng-template ngbTabContent>
         <div class="container" style="text-align: center">
           <h1 align="center" style="margin: 3%">CONSULTAR VEHICULO</h1>
-          <form>
-            <div class="form-group">
-              <label for="placaConsulta">PLACA A CONSULTAR:</label>
-              <input type="text" [(ngModel)]="consultaPlaca" name="consultaPlaca" class="form-control" id="placaConsulta" required>
-            </div>
-            
-            <div *ngIf="consultandoVehiculo" class="form-group">
-              <b>PLACA: </b>{{vehiculoConsultado.plate}}<br/>
-              <b>FECHA INGRESO: </b>{{vehiculoConsultado.entryDate}}<br/>
-              <b>TIPO: </b>{{vehiculoConsultado.type}}<br/>
-            </div>
-
-            <button (click)="ConsultarVehiculo()" class="btn btn-success" style="margin: 3%">Consultar Vehiculo</button>
-            <button (click)="limpiarForm('Consulta')" class="btn btn-info" style="margin: 3%">Limpiar</button>
-      
-          </form>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Placa</th>
+                <th>Tipo</th>
+                <th>Fecha Entrada</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let vehiculo of vehiculos">
+                <td>{{vehiculo.id}}</td>
+                <td>{{vehiculo.plate}}</td>
+                <td>{{vehiculo.type}}</td>
+                <td>{{vehiculo.entryDate}}</td>
+                <td><button (click)="salidaVehiculo(vehiculo.plate)" class="btn btn-info">Salida</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </ng-template>
     </ngb-tab>

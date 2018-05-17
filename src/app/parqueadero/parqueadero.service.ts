@@ -10,8 +10,8 @@ export class ParqueaderoService {
 
   constructor(private http: HttpClient) { }
 
-  consultarVehiculo(placa){
-    return this.http.get('http://localhost:8090/parking/ticket/'+placa).toPromise();
+  cargarVehiculos(){
+    return this.http.get('http://localhost:8090/parking/tickets/').toPromise();
   }
 
   ingresarVehiculo(vehiculo:Vehicle){
@@ -20,6 +20,10 @@ export class ParqueaderoService {
 
   retirarVehiculo(placa){
     return this.http.put('http://localhost:8090/parking/removeVehicle/'+placa, null).toPromise();
+  }
+
+  consultarVehiculo(placa){
+    return this.http.get('http://localhost:8090/parking/ticket/'+placa).toPromise();
   }
 
 }
