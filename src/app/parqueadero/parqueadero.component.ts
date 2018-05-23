@@ -27,7 +27,6 @@ export class ParqueaderoComponent implements OnInit {
   vehiculos:any = {};
   retiroPlaca:String = "";
   consultandoVehiculo = false;
-  precioDolar = "caro";
 
   constructor(
     private parqueaderoService: ParqueaderoService
