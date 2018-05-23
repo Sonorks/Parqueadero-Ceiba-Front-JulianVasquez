@@ -9,13 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ParqueaderoComponent } from './parqueadero/parqueadero.component';
 import { ParqueaderoService } from './parqueadero/parqueadero.service';
-import { TrmComponent } from './trm/trm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ParqueaderoComponent,
-    TrmComponent
   ],
   imports: [
     BrowserModule,
