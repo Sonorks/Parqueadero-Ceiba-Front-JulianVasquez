@@ -3,11 +3,11 @@
     <ngb-tab id="ingresarTab" title="Ingreso de vehiculos">
       <ng-template ngbTabContent>
           <div class="container" style="text-align: center">
-            <h1 align="center" style="margin: 3%">INGRESAR VEHICULO</h1>
+            <h1 id="ingresarTitulo" align="center" style="margin: 3%">INGRESAR VEHICULO</h1>
             <form name="ingresarVehiculoForm" id="ingresarVehiculoForm" #ingresarVehiculoForm="ngForm" novalidate>
               <div class="form-group">
-                <label for="placaIngreso">PLACA VEHICULO A INGRESAR:</label>
-                <input type="text" [(ngModel)]="ingresoModel.plate" name="plate" #plate="ngModel" class="form-control" id="placaIngreso" required minlength="5">
+                <label id="ingresarPlacaLabel" for="placaIngreso">PLACA VEHICULO A INGRESAR:</label>
+                <input id="ingresarPlaca" type="text" [(ngModel)]="ingresoModel.plate" name="plate" #plate="ngModel" class="form-control" id="placaIngreso" required minlength="5">
                 <div *ngIf="plate.invalid && plate.dirty" class="alert alert-danger">
                   <div *ngIf="plate.errors.required">
                     La placa es necesaria.
@@ -20,19 +20,19 @@
 
               <div class="form-group">
                 <label for="tipo">TIPO DE VEHICULO:</label>
-                <select class="form-control" [(ngModel)]="ingresoModel.type" name="type" id="tipo" required>
-                  <option (value)="CAR">CARRO</option>
-                  <option (value)="BIKE">MOTO</option>
+                <select id="ingresarTipoVehiculo" class="form-control" [(ngModel)]="ingresoModel.type" name="type" required>
+                  <option id="tipoCarro" (value)="CAR">CARRO</option>
+                  <option id="tipoMoto" (value)="BIKE">MOTO</option>
                 </select>
               </div>
         
-              <div *ngIf="(ingresoModel.type == 'BIKE')" class="form-group">
+              <div *ngIf="(ingresoModel.type == 'MOTO')"  class="form-group">
                 <label for="cc">CILINDRAJE VEHICULO:</label>
-                <input type="number" [(ngModel)]="ingresoModel.cc" name="cc" class="form-control" id="cc">
+                <input id="ingresarCC" type="number" [(ngModel)]="ingresoModel.cc" name="cc" class="form-control" id="cc">
               </div>
         
-              <button (click)="ingresarVehiculoForm.valid && IngresarVehiculo()" class="btn btn-success" style="margin: 3%">Ingresar Vehiculo</button>
-              <button (click)="limpiarForm('Ingreso')" class="btn btn-info" style="margin: 3%">Limpiar</button>
+              <button id="ingresarBoton" (click)="ingresarVehiculoForm.valid && IngresarVehiculo()" class="btn btn-success" style="margin: 3%">Ingresar Vehiculo</button>
+              <button id="ingresarLimpiar" (click)="limpiarForm('Ingreso')" class="btn btn-info" style="margin: 3%">Limpiar</button>
           
             </form>
           </div>
